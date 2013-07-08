@@ -23,7 +23,9 @@
             <header id="me">
                 <h1>I'm Rajeev Reddy</h1>
                 <h2>Web developer and robotics enthusiast</h2>
-                <p style="width:720px !important; text-align:justify !important; padding:0px !important;">Are you viewing this website in chrome? If not view it in chrome so that you can scroll using your webcam and your hands. Yes you heard it right using your computers webcam and your hand, if you dont have a webcam or google chrome installed then sorry god only can help you but still you can see the whole website you may like it.</p>
+                <p style="width:720px !important; text-align:justify !important; padding:0px !important;">The future of human website interaction is here. If you want to check this out follow these instructions:<br/>
+                    1. Allow webcam access to this website <br/>
+                    2. Swipe your hand <b>gently</b> from left to right or from right to left to scroll through the website.</p>
             </header>
             <section id="about">
                 <h1>About Me</h1>
@@ -46,7 +48,9 @@
             <section id="developed">
                 <br/><br/><br/><br/><br/><br/><br/><br/>
                 <h1>Current projects</h1>
-                <p>Currently Iam working on a project called Jarvizz , which is a ruby on rails based app in which I use voice recognition and faye as websockets to create an unique search engine the inspiration for this app is <a href="http://www.expectlabs.com/mindmeld/" target="none" >MindMeld</a> by Expect Labs.</p>
+                <p style="width:720px !important; text-align:justify !important; padding:0px !important;">Currently Iam working on a project called Jarvizz , which is a ruby on rails based app in which I use voice recognition and faye as websockets to create an unique search engine the inspiration for this app is <a href="http://www.expectlabs.com/mindmeld/" target="none" >MindMeld</a> by Expect Labs.</p>
+                <h3>About this website</h3>
+                <p style="width:720px !important; text-align:justify !important; padding:0px !important;">We track down the hand gestures and movements using lump mass detection algorithm through a webcam and then use a simple average to take a decision on what should be the result the irregularities in scrolling is due to the fact that webcam cannot determine depth. </p>
             </section>
             <section id="contact">
                 <h1>Contact</h1>
@@ -121,8 +125,76 @@
                 $.fn.scrollPath("scrollTo", this.hash.substring(1), 2000);
             });
         </script>
-		<div id="disp"><canvas id="comp"></canvas></div>
+    	<div id="disp"><canvas id="comp"></canvas></div>
 		<video id="video" autoplay width="300" style="display:none"></video>
 		<canvas id="canvas" style="width:300px;display:none;"></canvas>
-		<script src="js/gesture.js"></script>	</body>
+		<script src="js/gesture.js"></script>
+        <script>
+            var nVer = navigator.appVersion;
+            var nAgt = navigator.userAgent;
+            var browserName  = navigator.appName;
+            var fullVersion  = ''+parseFloat(navigator.appVersion); 
+            var majorVersion = parseInt(navigator.appVersion,10);
+            var nameOffset,verOffset,ix;
+
+            // In Opera, the true version is after "Opera" or after "Version"
+            if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+             browserName = "Opera";
+             fullVersion = nAgt.substring(verOffset+6);
+             if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+               fullVersion = nAgt.substring(verOffset+8);
+            }
+            // In MSIE, the true version is after "MSIE" in userAgent
+            else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+             browserName = "Microsoft Internet Explorer";
+             fullVersion = nAgt.substring(verOffset+5);
+            }
+            // In Chrome, the true version is after "Chrome" 
+            else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+             browserName = "Chrome";
+             fullVersion = nAgt.substring(verOffset+7);
+            }
+            // In Safari, the true version is after "Safari" or after "Version" 
+            else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+             browserName = "Safari";
+             fullVersion = nAgt.substring(verOffset+7);
+             if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+               fullVersion = nAgt.substring(verOffset+8);
+            }
+            // In Firefox, the true version is after "Firefox" 
+            else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+             browserName = "Firefox";
+             fullVersion = nAgt.substring(verOffset+8);
+            }
+            // In most other browsers, "name/version" is at the end of userAgent 
+            else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) < 
+                      (verOffset=nAgt.lastIndexOf('/')) ) 
+            {
+             browserName = nAgt.substring(nameOffset,verOffset);
+             fullVersion = nAgt.substring(verOffset+1);
+             if (browserName.toLowerCase()==browserName.toUpperCase()) {
+              browserName = navigator.appName;
+             }
+            }
+            // trim the fullVersion string at semicolon/space if present
+            if ((ix=fullVersion.indexOf(";"))!=-1)
+               fullVersion=fullVersion.substring(0,ix);
+            if ((ix=fullVersion.indexOf(" "))!=-1)
+               fullVersion=fullVersion.substring(0,ix);
+
+            majorVersion = parseInt(''+fullVersion,10);
+            if (isNaN(majorVersion)) {
+             fullVersion  = ''+parseFloat(navigator.appVersion); 
+             majorVersion = parseInt(navigator.appVersion,10);
+            }
+
+            if (browserName != "Chrome"){
+               alert("View in chrome for gesture detection to apply");
+            }
+            else{
+               alert("Allow webcam access to this website after that swipe your hand from left to right or from right to left gently to scroll through the website");
+            }
+
+        </script>
+</body>
 </html>
