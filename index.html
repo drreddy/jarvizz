@@ -5,8 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <link rel="stylesheet" type="text/css" href="css/scrollpath.css" /> 
         <link rel="stylesheet" type="text/css" href="css/style.css" /> 
-        <link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
-        
+        <link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />        
     <!--[if gt IE 7]>
         <link rel="stylesheet" type="text/css" href="style/navie.css" media="screen" />
     <![endif]-->
@@ -23,9 +22,10 @@
             <header id="me">
                 <h1>I'm Rajeev Reddy</h1>
                 <h2>Web developer and robotics enthusiast</h2>
-                <p style="width:720px !important; text-align:justify !important; padding:0px !important;">The future of human website interaction is here. If you want to check this out follow these instructions:<br/>
-                    1. Allow webcam access to this website <br/>
-                    2. Swipe your hand <b>gently</b> from left to right or from right to left to scroll through the website.</p>
+                <p style="width:750px !important; text-align:justify !important; padding:0px !important;">The future of human -  website interaction is here. If you want to check this out follow these instructions:<br/>
+                    1. Open this website in <b>Google Chrome</b> only and allow webcam access to this website and keep your laptop screen vertical.<br/>
+                    2. Keep your hand stiff and perpendicular to screen and ~10cm from screen <br/>
+                    3. Swipe your hand <b>gently</b> from left to right or from right to left to scroll through the website.</p>
             </header>
             <section id="about">
                 <h1>About Me</h1>
@@ -88,8 +88,40 @@
 
         <!-- end container -->
         </div>
+        <div id="instructions" class="modal hide fade" style="width:760px !important; margin-left:-380px !important;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+            <h4 id="myModalLabel" style="color:black;">Instructions</h4>
+          </div>
+          <div class="modal-body" style="text-align:justify !important">
+            <div class="content" style="color:black;">
+                <ol>
+                    <li>Open this website in <b>Google Chrome</b> only and allow webcam access to this website and keep your laptop screen vertical.</li>
+                    <li>Keep your hand stiff and perpendicular to screen and ~10cm from screen</li>
+                    <li>Then swipe your hand <b>gently</b> from left to right or from right to left to scroll through the website.</li>
+                </ol>
+            </div>
+          </div>
+          <div class="modal-footer" style="color:black;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="cursor:pointer;">Ok</button>
+          </div>
+        </div>
+        <div id="Crappy" class="modal hide fade" style="width:760px !important; margin-left:-380px !important;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+            <h4 id="myModalLabel" style="color:black;">Problems</h4>
+          </div>
+          <div class="modal-body" style="text-align:justify !important">
+            <div class="content" style="color:black;">
+                <p>We believe that your present browser is not modern enough to have gesture recognition using webcam. So, for gesture recognition please view this website in google chrome or if you choose not to use gesture recognition ignore this message and continue.</p>
+            </div>
+          </div>
+          <div class="modal-footer" style="color:black;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="cursor:pointer;">Ok</button>
+          </div>
+        </div>
         <div class="elem" style="display:none;">1</div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-transition.js"></script>
+        <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
         <script src="js/min.jquery.scrollpath.js"></script>
         <script>
             // Get the path object from the plugin.
@@ -125,9 +157,9 @@
                 $.fn.scrollPath("scrollTo", this.hash.substring(1), 2000);
             });
         </script>
-    	<div id="disp"><canvas id="comp"></canvas></div>
-		<video id="video" autoplay width="300" style="display:none"></video>
-		<canvas id="canvas" style="width:300px;display:none;"></canvas>
+    	<div id="disp" style="position:fixed; z-index:-10000; display:none;"><canvas id="comp" style="position:fixed; z-index:-10000; display:none;"></canvas></div>
+		<video id="video" autoplay width="300" style="position:fixed; z-index:-10000; display:none;"></video>
+		<canvas id="canvas" style="width:300px; position:fixed; z-index:-10000; display:none;"></canvas>
 		<script src="js/gesture.js"></script>
         <script>
             var nVer = navigator.appVersion;
@@ -189,10 +221,13 @@
             }
 
             if (browserName != "Chrome"){
-               alert("View in chrome for gesture detection to apply");
+               $('#Crappy').modal('show');
+               $('#Crappy').css('z-index',0);
             }
             else{
-               alert("Allow webcam access to this website after that swipe your hand from left to right or from right to left gently to scroll through the website");
+                $('#instructions').modal('show');
+                $('#Crappy').css('z-index',0);
+               //alert("Allow webcam access to this website after that swipe your hand from left to right or from right to left gently to scroll through the website");
             }
 
         </script>
